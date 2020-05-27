@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/44a2be16ef.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -22,21 +23,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Calendar" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Home" asp-action="Calendar">Calendar</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Contacts" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Home" asp-action="Contacts">Contacts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Calendar</a>
+                        <a class="nav-link" target="_blank" href="http://www.picturetrail.com/whwtcops">Photo Album</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contacts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacts</a>
-                    </li>
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="#">Newsletter</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Newsletter" ? "active" : "")" asp-controller="Home" asp-action="Newsletter">Newsletter</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -46,8 +46,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" target="_blank" href="https://www.westiefoundation.org/westie-health.html">Health</a>
                             <a class="dropdown-item" target="_blank" href="https://www.westieclubamerica.com/about-west-highland-white-terriers/standard/index.html">Breed Standard</a>
-                            <a class="dropdown-item" href="/breed-history">Breed History</a>
-                            <a class="dropdown-item" href="/choosing-puppy">Choosing Your Puppy</a>
+                            <a class="dropdown-item" asp-controller="Breed" asp-action="History">Breed History</a>
+                            <a class="dropdown-item" asp-controller="Breed" asp-action="Choosing">Choosing Your Puppy</a>
                             <a class="dropdown-item" target="_blank" href="https://www.westieclubamerica.com/Versatile-westies/index.html">Versatility</a>
                             <a class="dropdown-item" target="_blank" href="https://www.westieclubamerica.com/about-west-highland-white-terriers/behavior/index.html">Behavior Problems</a>
                             <a class="dropdown-item" target="_blank" href="https://www.yourpurebredpuppy.com/reviews/westhighlandwhiteterriers.html">Is a Westie the Right Breed for You?</a>
@@ -59,12 +59,36 @@
                             Club Info
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/club-history">History</a>
-                            <a class="dropdown-item" href="/mission-statement">Mission Statement</a>
-                            <a class="dropdown-item" href="/club-code-ethics">Code of Ethics</a>
-                            <a class="dropdown-item" href="/club-officers">Club Officers</a>
-                            <a class="dropdown-item" target="_blank" href="https://www.westieclubamerica.com/about-west-highland-white-terriers/behavior/index.html">Behavior Problems</a>
-                            <a class="dropdown-item" target="_blank" href="https://www.yourpurebredpuppy.com/reviews/westhighlandwhiteterriers.html">Is a Westie the Right Breed for You?</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="History">History</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="MissionStatement">Mission Statement</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Code">Code of Ethics</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Contacts">Club Officers</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Referral">Breeder Referral</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Membership Links
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Membership" asp-action="NewMembers">New Members - Published & Pending</a>
+                            <a class="dropdown-item" asp-controller="Membership" asp-action="Benefits">Benefits of Membership</a>
+                            <a class="dropdown-item" target="_blank" href="http://www.whwtcops.org/constitution_bylaws/constitution_bylaws_dec2019.pdf">Constitution & Bylaws</a>
+                            <a class="dropdown-item" target="_blank" href="http://www.whwtcops.org/membership/whwtcops_membership_application_2018_Parish.pdf">Membership Form (hard copy)</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Rescue
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Rescue" asp-action="Info">Information</a>
+                            <a class="dropdown-item" asp-controller="Rescue" asp-action="Contacts">Rescue Contacts</a>
+                            <a class="dropdown-item" asp-controller="Rescue" asp-action="News">Rescue News</a>
+                            <a class="dropdown-item" target="_blank" href="http://www.picturetrail.com/spdr">Rescue Photos</a>
+                            <a class="dropdown-item" asp-controller="Rescue" asp-action="Donate">Volunteer/Donate</a>
                         </div>
                     </li>
                 </ul>
@@ -73,6 +97,7 @@
     </header>
     <div class="westie-container">
         <main role="main" class="pb-3">
+            
             @RenderBody()
         </main>
     </div>

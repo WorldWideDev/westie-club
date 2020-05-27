@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = "Breeder Referral";
+}
+@using Microsoft.AspNetCore.Mvc.ModelBinding;
+@model Referral
+<h1>Breeder Referral Request</h1>
+<p>One of our goals is to help Westie lovers find the perfect Westie for their family- be it an adult rescue or a new puppy. It is also important to all the breeders that belong to our club to find the best families for the puppies they raise.</p>
+<p>We are happy to help accomplish these goals by making available a breeder referral contact who can direct you to the breeders or rescue people who are members of our club. We CANNOT however, make any guarantees or representations pertaining to any Westie that they choose to adopt from any of the parties our representative may refer you to.</p>
+<p>Use this form for a breeder referral. '*' denotes required field. Thanks!!</p>
+<p>If you are looking for a rescue, please visit our <a asp-controller="Rescue" asp-action="Info">rescue page</a>.</p>
+<form id="referral-form" asp-action="Referral" asp-controller="Home" method="post">
+    <div>
+        <section>
+            <div class="form-group">
+                @{
+                    String fnValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("FirstName") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="FirstName"></span>
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control @fnValid">
+            </div>
+            <div class="form-group">
+                @{
+                    String lnValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("LastName") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="LastName"></span>
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control @lnValid">
+            </div>
+            <div class="form-group">
+                @{
+                    String cValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("City") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="City"></span>
+                <label asp-for="City"></label>
+                <input asp-for="City" class="form-control @cValid">
+            </div>
+            <div class="form-group">
+                @{
+                    String sValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("State") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="State"></span>
+                <label asp-for="State"></label>
+                <input asp-for="State" class="form-control">
+            </div>
+            <div class="form-group">
+                @{
+                    String eValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("Email") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="Email"></span>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
+            </div>
+            <div class="form-group">
+                @{
+                    String ecValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("EmailConfirm") == ModelValidationState.Valid
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="EmailConfirm"></span>
+                <label asp-for="EmailConfirm"></label>
+                <input asp-for="EmailConfirm" class="form-control @ecValid">
+            </div>
+        </section>
+        <section>
+            <div class="form-group">
+                
+                <span asp-validation-for="Gender"></span>
+                <label asp-for="Gender"></label>
+                @foreach(var gender in Enum.GetValues(typeof(Referral.Genders)))
+                {
+                    string id = gender + "-" + typeof(Referral.Genders).ToString();
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Gender" value="@gender" id="@id">
+                        <label class="form-check-label" asp-for="Gender" for="@id">@gender</label>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <span asp-validation-for="DesiredAge"></span>
+                <label asp-for="DesiredAge"></label>
+                @foreach(var ageChoice in Enum.GetValues(typeof(Referral.Ages)))
+                {
+                    string id = ageChoice + "-" + typeof(Referral.Ages).ToString();
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="DesiredAge" value="@ageChoice" id="@id">
+                        <label class="form-check-label" asp-for="DesiredAge" for="@id">@ageChoice</label>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                @{
+                    String timValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("Timing") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="Timing"></span>
+                <label asp-for="Timing"></label>
+                <textarea asp-for="Timing" class="form-control @timValid" placeholder="In what time frame do you hope to fetch your Westie?"></textarea>
+            </div>
+            <div class="form-group">
+                @{
+                    String charValid = 
+                        ViewData.ModelState.ErrorCount < 1 || 
+                        ViewData.ModelState.GetFieldValidationState("Characteristics") == ModelValidationState.Valid 
+                        ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="Characteristics"></span>
+                <label asp-for="Characteristics"></label>
+                <textarea asp-for="Characteristics" class="form-control @charValid" placeholder="What characteristics are you looking for in your Westie?"></textarea>
+            </div>
+            <div class="form-group">
+                @{
+                    String comValid = ViewData.ModelState.ErrorCount < 1 || ViewData.ModelState.GetFieldValidationState("Comments") == ModelValidationState.Valid ? "is-valid" : "is-invalid";
+                }
+                <span asp-validation-for="Comments"></span>
+                <label asp-for="Comments"></label>
+                <textarea asp-for="Comments" class="form-control @comValid" placeholder="Comments"></textarea>
+            </div>
+        </section>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>

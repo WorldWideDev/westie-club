@@ -18,8 +18,23 @@ namespace WestieClub.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() => View();
+       
+        public IActionResult Calendar() => View();
+        public IActionResult Contacts() => View();
+        public IActionResult Newsletter() => View();
+        public IActionResult History() => View();
+        public IActionResult Code() => View();
+        public IActionResult MissionStatement() => View();
+        public IActionResult Referral() => View();
+        [HttpPost]
+        public IActionResult Referral(Referral model)
         {
+            if(ModelState.IsValid)
+            {
+                // create a new Referral, eventually
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
