@@ -11,11 +11,12 @@
 }
   
 header, .footer {
-    background-color: #114123;
+    /* background-color: #114123; */
+    /* opacity: .5; */
     text-align: center;
     
 }
-header > h1 {
+header > h1#title {
     padding: .4em;
     margin: 0;
     font-family: 'Uncial Antiqua', cursive;
@@ -38,11 +39,14 @@ body {
 nav > img, header > img {
     width: 5em;
 }
+/* #navbarNavDropdown .nav-link {
+    color: white;
+} */
 .dropdown-item {
-    font-size: .8rem;
+    font-size: .75rem;
 }
 .nav-item {
-    font-size: .9rem;
+    font-size: .8rem;
 }
 .westie-container {
     background-color: #c8c8c8;
@@ -51,16 +55,30 @@ nav > img, header > img {
     margin: 0 20px;
     padding: 20px;
 }
+.westie-container * {
+    font-family: 'Montserrat', sans-serif
+}
+.westie-container p {
+    font-size: .7rem;
+}
 #referral-form > div{
     display: flex;
     justify-content: space-evenly;
 }
 #referral-form section {
-    width: 50%;
     padding: 2em;
 }
 .form-group > label {
     display: block;
+    border-bottom: solid 1px black;
+}
+.form-group > span {
+    color: #dc3545;
+    display: block;
+}
+#contacts td:first-child {
+    font-weight: bold;
+    width: 10em;
 }
 /* nav {
     background-color: #7A75B3;
@@ -94,8 +112,22 @@ nav > img, header > img {
     font-size: calc(16px + 6 * ((100vw - 320px) / 680));
   }
 }
+@media screen and (max-width: 1000px) {
+    #referral-form > div {
+        flex-direction: column;
+    }
+    #referral-form section {
+        width: 100%;
+    }
+}
 @media screen and (min-width: 1000px) {
   html {
     font-size: 22px;
   }
+    #referral-form > div {
+        flex-direction: row;
+    }
+    #referral-form section {
+        width: 50%;
+    }
 }
